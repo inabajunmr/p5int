@@ -21,7 +21,6 @@ function draw() {
     if(currentObject != null) {
         drawObject(currentObject);
     }
-
     document.getElementById("result").value = result(objects);
 }
 
