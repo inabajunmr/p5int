@@ -27,12 +27,7 @@ function draw() {
 
 var currentObjectType = "line";
 function setCurrentObjectType(type) {
-    if(currentObjectType == "vertex") {
-        // TODO strange logic
-        currentObject.status = "complete";
-        objects.push(currentObject);
-    }
-
+    completeVertex();
     currentObjectType = type;
 }
 
@@ -188,6 +183,17 @@ function getColor() {
 }
 
 function setColor() {
+    completeVertex();
     const rgb = getColor();
     objects.push(rgb);
+}
+
+function completeVertex() {
+    if(currentObjectType == "vertex") {
+        // TODO strange logic
+        currentObject.status = "complete";
+        objects.push(currentObject);
+        currentObject = null;
+    }
+    
 }
