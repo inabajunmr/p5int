@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script>
+    <script src="sketch.js"></script>
+  </head>
+  <body>
+    <main>
+    </main>
+    <button onClick="setCurrentObjectType('line')">line</button>
+    <button onClick="setCurrentObjectType('rect')">rect</button>
+    <button onClick="setCurrentObjectType('ellipse')">ellipse</button>
+    <input type="text" onchange="setCanvas()" id="width" placeholder="width" value="400">
+    <input type="text" onchange="setCanvas()" id="height" placeholder="height" value="400">
+    <br>
+    <br>
+    <textarea id="result" rows="20" cols="60"></textarea>
+
+  </body>
+</html>
