@@ -107,6 +107,9 @@ function drawObject(object) {
                 ellipse(object.startX, object.startY, abs(object.endX - object.startX) * 2, abs(object.endY - object.startY) * 2);
             }
             return;
+        case "fill":
+                fill(object.r, object.g, object.b);
+            return;            
         default:
             break;
     }
@@ -128,6 +131,8 @@ function toString(object) {
             return `rect(${object.startX}, ${object.startY}, ${object.endX - object.startX}, ${object.endY - object.startY});\n`
         case "ellipse":
             return `ellipse(${object.startX}, ${object.startY}, ${abs(object.endX - object.startX) * 2}, ${abs(object.endY - object.startY) * 2});\n`
+        case "fill":
+            return `fill(${object.r}, ${object.g}, ${object.b});\n`
         default:
             break;
     
@@ -138,4 +143,17 @@ function setCanvas() {
     canvasHeight = document.getElementById("height").value;
     canvasWidth = document.getElementById("width").value;
     changeCanvas = true;
+}
+
+function getColor() {
+    const hex = document.getElementById("color").value;
+    const r = parseInt(hex.slice(1,3), 16);
+    const g = parseInt(hex.slice(3,5), 16);
+    const b = parseInt(hex.slice(5,7), 16);
+    return {type: "fill", r: r, g: g, b: b};
+}
+
+function setColor() {
+    const rgb = getColor();
+    objects.push(rgb);
 }
