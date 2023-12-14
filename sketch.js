@@ -163,9 +163,9 @@ function toString(object) {
         case "vertex":
             var value = "beginShape();\n";
             object.vertexes.forEach(element => {
-                value += `vertex(${element.x}, ${element.y});`
+                value += `vertex(${element.x}, ${element.y});\n`
             });
-            value += "endShape();";
+            value += "endShape();\n";
             return value;
         default:
             break;
