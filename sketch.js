@@ -8,6 +8,7 @@ function setup() {
 
 var objects = [];
 function draw() {
+
     if(changeCanvas) {
         createCanvas(canvasWidth, canvasHeight);
         objects = [];
@@ -26,6 +27,12 @@ function draw() {
 
 var currentObjectType = "line";
 function setCurrentObjectType(type) {
+    if(currentObjectType == "vertex") {
+        // TODO strange logic
+        currentObject.status = "complete";
+        objects.push(currentObject);
+    }
+
     currentObjectType = type;
 }
 
@@ -78,7 +85,17 @@ function mouseClicked() {
                 currentObject = null;
                 return;
             }
-            break;        
+            break;
+        case "vertex":
+            if(currentObject == null) {
+                currentObject = {type: "vertex", status: "init", vertexes: [{x: mouseX, y: mouseY}]};
+                return;
+            }
+            if(currentObject.status == "init") {
+                currentObject.vertexes.push({x: mouseX, y: mouseY})
+                return;
+            }
+            break;            
         default:
             break;
     }
@@ -108,7 +125,17 @@ function drawObject(object) {
             }
             return;
         case "fill":
-                fill(object.r, object.g, object.b);
+            fill(object.r, object.g, object.b);
+            return;            
+        case "vertex":
+            beginShape();
+            object.vertexes.forEach(element => {
+               vertex(element.x, element.y);
+            });
+            if(object.status == "init") {
+                vertex(mouseX, mouseY);
+            }
+            endShape();
             return;            
         default:
             break;
@@ -133,6 +160,13 @@ function toString(object) {
             return `ellipse(${object.startX}, ${object.startY}, ${abs(object.endX - object.startX) * 2}, ${abs(object.endY - object.startY) * 2});\n`
         case "fill":
             return `fill(${object.r}, ${object.g}, ${object.b});\n`
+        case "vertex":
+            var value = "beginShape();\n";
+            object.vertexes.forEach(element => {
+                value += `vertex(${element.x}, ${element.y});`
+            });
+            value += "endShape();";
+            return value;
         default:
             break;
     
