@@ -4,4 +4,4 @@ https://inabajunmr.github.io/p5int/
 Code Generator for [p5.js](https://p5js.org/) 2D shapes.
 
 
-<img width="579" alt="スクリーンショット 2023-12-15 3 45 32" src="https://github.com/inabajunmr/p5int/assets/10000393/61fdf671-7923-4f46-9207-67e37d90ee21">
+![Dec-15-2023 12-18-36](https://github.com/inabajunmr/p5int/assets/10000393/97f137cf-d267-4cbc-842d-15f39888f654)
