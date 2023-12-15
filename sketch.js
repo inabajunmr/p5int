@@ -189,11 +189,16 @@ function setColor() {
 }
 
 function completeVertex() {
-    if(currentObjectType == "vertex") {
+    if(currentObject != null && currentObject.type == "vertex") {
         // TODO strange logic
         currentObject.status = "complete";
         objects.push(currentObject);
         currentObject = null;
+    }    
+}
+
+function keyPressed() {
+    if(key == "Escape") {
+        currentObject = null;
     }
-    
 }
