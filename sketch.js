@@ -6,23 +6,20 @@ function setup() {
     createCanvas(canvasWidth, canvasHeight);
 }
 
-var objects = [];
 function draw() {
 
     if(changeCanvas) {
         createCanvas(canvasWidth, canvasHeight);
-        objects = [];
         changeCanvas = 0;
         return;
     }
     fill(255);
     rect(0, 0, width, height);
     stroke(1);
-    objects.forEach((element) => drawObject(element));
+    eval(document.getElementById("result").value);
     if(currentObject != null) {
         drawObject(currentObject);
     }
-    document.getElementById("result").value = result(objects);
 }
 
 var currentObjectType = "line";
@@ -49,7 +46,7 @@ function mouseClicked() {
                 currentObject.status = "complete";
                 currentObject.endX = mouseX;
                 currentObject.endY = mouseY;
-                objects.push(currentObject);
+                document.getElementById("result").value += toString(currentObject);
                 currentObject = null;
                 return;
             }
@@ -62,7 +59,7 @@ function mouseClicked() {
                 currentObject.status = "complete";
                 currentObject.endX = mouseX;
                 currentObject.endY = mouseY;
-                objects.push(currentObject);
+                document.getElementById("result").value += toString(currentObject);
                 currentObject = null;
                 return;
             }
@@ -76,7 +73,7 @@ function mouseClicked() {
                 currentObject.status = "complete";
                 currentObject.endX = mouseX;
                 currentObject.endY = mouseY;
-                objects.push(currentObject);
+                document.getElementById("result").value += toString(currentObject);
                 currentObject = null;
                 return;
             }
@@ -137,14 +134,6 @@ function drawObject(object) {
     }
 }
 
-function result(objects) {
-    var result = "";
-    for (const object of objects) {
-        result += toString(object);
-    }
-    return result;
-}
-
 function toString(object) {
     switch(object.type) {
         case "line":
@@ -185,14 +174,15 @@ function getColor() {
 function setColor() {
     completeVertex();
     const rgb = getColor();
-    objects.push(rgb);
+    document.getElementById("result").value += toString(rgb);
+
 }
 
 function completeVertex() {
     if(currentObject != null && currentObject.type == "vertex") {
         // TODO strange logic
         currentObject.status = "complete";
-        objects.push(currentObject);
+        document.getElementById("result").value += toString(currentObject);
         currentObject = null;
     }    
 }
